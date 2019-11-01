@@ -23,7 +23,7 @@ namespace Save_In_Companion
 
         public string DownloadsFolderPath { get; set; }
 
-        public string SaveInLinksFolderName { get; set; }
+        public string SaveInLinksFolderName { get; set; } = "SaveInLinks";
 
         public string SaveInLinksFolderPath { get { return Path.Combine(DownloadsFolderPath, SaveInLinksFolderName); } }
 
@@ -52,14 +52,6 @@ namespace Save_In_Companion
         private Settings()
         {
             DownloadsFolderPath = GetDefaultDownloadsFolder();
-            if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX)
-            {
-                SaveInLinksFolderName = ".SaveInLinks";
-            }
-            else
-            {
-                SaveInLinksFolderName = "SaveInLinks";
-            }
         }
 
         public void SaveSettings()
