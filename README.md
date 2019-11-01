@@ -12,7 +12,7 @@ This program provides a GUI solution to easily organize your folders in various 
 * Saves yours setup for easy future tweaking.
 
 # Requirements
-This software was written with .NET 4.5 and higher for compatible Windows OS. It can also runs in Linux with Mono and possibly other nix systems. The Save In... extension and a compatible browser would also be useful.
+This software was written with .NET 4.5 and higher for compatible Windows OS. It can also run in Linux with Mono and possibly other nix systems. The Save In... extension and a compatible browser would also be useful.
 
 # Notes
 * Save In... does not support dotfiles, this program does not currently catch them or issue a warning.
