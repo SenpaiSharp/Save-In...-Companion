@@ -143,7 +143,7 @@ namespace Save_In_Companion
         {
             Process process = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            //startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
             if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX)
             {
@@ -159,7 +159,7 @@ namespace Save_In_Companion
                 if (IsUserAnAdmin()) linktype = "D";
                 else linktype = "J";
 
-                startInfo.Arguments = string.Format(@"/K mklink /{0} ""{1}"" ""{2}""", linktype, linkPath, realPath);
+                startInfo.Arguments = string.Format(@"/C mklink /{0} ""{1}"" ""{2}""", linktype, linkPath, realPath);
             }
 
             process.StartInfo = startInfo;
