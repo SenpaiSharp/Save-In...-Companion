@@ -49,7 +49,7 @@ namespace Save_In_Companion
                     string temp = Path.GetDirectoryName(path);
                     if (String.IsNullOrEmpty(temp))
                         break;
-                    path = temp;
+                    rootFolder = temp;
                 } 
             }
             return rootFolder;
@@ -149,7 +149,7 @@ namespace Save_In_Companion
             {
                 startInfo.FileName = "ln";
 
-                startInfo.Arguments = string.Format("-s {0} {1}", realPath, linkPath);
+                startInfo.Arguments = string.Format(@"-s ""{0}"" ""{1}""", realPath, linkPath);
             }
             else
             {
@@ -159,7 +159,7 @@ namespace Save_In_Companion
                 if (IsUserAnAdmin()) linktype = "D";
                 else linktype = "J";
 
-                startInfo.Arguments = string.Format("/C mklink /{0} {1} {2}", linktype, linkPath, realPath);
+                startInfo.Arguments = string.Format(@"/c mklink /{0} ""{1}"" ""{2}""", linktype, linkPath, realPath);
             }
 
             process.StartInfo = startInfo;
