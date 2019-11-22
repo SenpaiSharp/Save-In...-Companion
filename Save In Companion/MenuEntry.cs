@@ -12,11 +12,16 @@ namespace Save_In_Companion
     /// </summary>
     public class MenuEntry
     {
+        //Hack: Replacing - with spaces to avoid a bug that is within the current version of Save In which does not like -'s after the path.
+        //Doing this in a dirty way to make it easy to rip out later, if and when the bug gets fixed.
+        private string name;
+        private string comment;
+
+        public string Name { get { return name; } set { name = value.Replace('-', ' '); } }
+
+        public string Comment { get { return comment; } set { comment = value.Replace('-', ' '); } }
+
         public string FolderPath { get; set; }
-
-        public string Name { get; set; }
-
-        public string Comment { get; set; }
 
         public List<MenuEntry> SubEntries { get; set; }
 
@@ -87,7 +92,7 @@ namespace Save_In_Companion
                 else
                 {
                     // Get the drive prefix.
-                    string drivePrefix = Path.GetPathRoot(FolderPath);
+                    string drivePrefix = Path.GetPathRoot(FolderPath); ;
 
                     // Get the folder path with the drive prefix removed
                     string relativePath = FolderPath.Remove(0, drivePrefix.Length);
