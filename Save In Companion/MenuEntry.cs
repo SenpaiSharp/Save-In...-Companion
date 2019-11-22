@@ -57,6 +57,21 @@ namespace Save_In_Companion
 
         public void BuildOutput(StringWriter stream, Settings settings)
         {
+            //HACK: Replace - dashes with spaces to avoid a bug that occurs in Save In... with lines that have dashes after the path. Remove this if and when that bug is fixed. 
+            string hackName = "";
+
+            if (!string.IsNullOrEmpty(Name))
+            {
+                hackName = Name.Replace('-', ' ');
+            }
+
+            string hackComment = "";
+
+            if (!string.IsNullOrEmpty(Comment))
+            {
+                hackComment = Comment.Replace('-', ' ');
+            }
+
             if (IsSeperator)
             {
                 stream.WriteLine("---");
@@ -65,7 +80,7 @@ namespace Save_In_Companion
             {
                 if (SubEntries.Count > 0)
                 {
-                    stream.WriteLine(string.Format(". // (alias:{0})", Name));
+                    stream.WriteLine(string.Format(". // (alias:{0})", hackName));
                     SubEntries.ForEach(x => x.BuildOutput(stream, settings));
                 }
             }
@@ -77,7 +92,7 @@ namespace Save_In_Companion
                 {
                     if (FolderPath == settings.DownloadsFolderPath)
                     {
-                        finalPath = string.Format(". //{0} (alias: {1})", Comment, Name);
+                        finalPath = string.Format(". //{0} (alias: {1})", hackComment, hackName);
                     }
                     else
                     {
@@ -104,7 +119,7 @@ namespace Save_In_Companion
 
                     // create final written path
                     finalPath = string.Format("{0}{1} //{2} (alias:{3})", new string('>', Deepness),
-                        Path.Combine(settings.SaveInLinksFolderName, driveLetter + relativePath), Comment, Name);
+                        Path.Combine(settings.SaveInLinksFolderName, driveLetter + relativePath), hackComment, hackName);
 
                     if (!settings.SkipLinkCreation)
                     {
